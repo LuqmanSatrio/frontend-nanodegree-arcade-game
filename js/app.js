@@ -1,6 +1,6 @@
 // Enemies our player must avoid
 // speed defines the amount of postion changes made in one movement
-var Enemy = function(x,y,velocity) {
+function Enemy(x,y,velocity) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
@@ -23,6 +23,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = 0;
     }
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -43,18 +44,24 @@ function Player(x,y,velocity){
 
 Player.prototype.update = function(){
 
-    if(this.KeyPressed === 'left'){
+
+    if(player.x>0 && this.KeyPressed === 'left'){
            this.x -= this.velocity;
-    } else if(this.KeyPressed === 'right'){
+    } else if(player.x<400 && this.KeyPressed === 'right'){
            this.x += this.velocity;
     }  else if(this.KeyPressed === 'up'){
            this.y -= this.velocity;
-     } else if(this.KeyPressed === 'down'){
+     } else if(player.y<380 && this.KeyPressed === 'down'){
            this.y += this.velocity;
-    }
-
+}
 // makes sure that the player is only moved once when a button is pressed
      this.KeyPressed = "";
+
+
+if(this.y<0){
+    this.x = 200;
+    this.y = 400;
+}
 
 }
 
@@ -70,7 +77,7 @@ Player.prototype.handleInput = function(e){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(202.5, 383, 50);
+var player = new Player(200, 380, 50);
 var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
