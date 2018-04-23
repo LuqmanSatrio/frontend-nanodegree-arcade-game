@@ -32,7 +32,7 @@ allEnemies.forEach(function(enemy){
 })
 };
 
-// Draw the enemy on the screen, required method for game
+// Draws the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -78,6 +78,7 @@ if(this.y<0){
 
 }
 
+// when the water is reached, the function nextLevel() is beeing called
 function nextLevel(){
    score = score +1;
    level = level +1;
@@ -90,10 +91,11 @@ function nextLevel(){
    {
     congratsText = "WAAAAAAAAAAAAAAAAAAAAA!!!!!"
    }
-    var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
+    var enemy = new Enemy(0,Math.floor((Math.random() * 233) + 0), Math.floor((Math.random() * 350) + 0));
     allEnemies.push(enemy);
 }
 
+// displays the points and levels, that the player currently have
 function displayPointAndLevel(){
     document.getElementById('scoreAndLevel').innerHTML = "Score: " + score + " | Level: " + level + "<br>" + congratsText ;
 }
@@ -118,7 +120,7 @@ Player.prototype.handleInput = function(e){
 // Place the player object in a variable called player
 var allEnemies = [];
 var player = new Player(200, 380, 30);
-var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
+var enemy = new Enemy(0,Math.floor((Math.random() * 233) + 0), Math.floor((Math.random() * 350) + 0));
 var score = 0;
 var level = 1;
 var congratsText = "";
