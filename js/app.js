@@ -25,11 +25,13 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
 
-allEnemies.forEach(function(enemy){
-    if(((enemy.y + 30) > player.y  && (enemy.y - 30) < player.y) && ((enemy.x + 50) > player.x && (enemy.x - 50) < player.x)){
-         playerStartPosition();
+    if(((this.y + 50) > (player.y - 30))
+        && ((this.y - 50) < (player.y + 30))
+        && ((this.x + 50) > (player.x - 30))
+        && ((this.x - 50) < (player.x + 30))){
+         player.restartPosition();
     }
-})
+
 };
 
 // Draws the enemy on the screen, required method for game
@@ -73,7 +75,7 @@ displayPointAndLevel();
 
 // if the player reaches the water the position is beeing renewed
 if(this.y<0){
-   playerStartPosition();
+   player.restartPosition();
    nextLevel();
 
 }
@@ -103,10 +105,11 @@ function displayPointAndLevel(){
 }
 
 //sets the player in the starting position
-function playerStartPosition(){
-        player.x = 200;
-         player.y = 380;
+Player.prototype.restartPosition = function (){
+    player.x = 200;
+    player.y = 380;
 }
+
 Player.prototype.render = function(){
 ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
