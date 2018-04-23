@@ -53,6 +53,7 @@ Player.prototype.update = function(){
            this.y -= this.velocity;
      } else if(player.y<380 && this.KeyPressed === 'down'){
            this.y += this.velocity;
+
 }
 // makes sure that the player is only moved once when a button is pressed
      this.KeyPressed = "";
@@ -66,12 +67,23 @@ Player.prototype.update = function(){
 
 // if the player reaches the water the position is beeing renewed
 if(this.y<0){
-    this.x = 200;
-    this.y = 380;
+   playerStartPosition();
 }
 
+
+
+allEnemies.forEach(function(enemy){
+    if(((enemy.y + 30) > player.y  && (enemy.y - 30) < player.y) && ((enemy.x + 50) > player.x && (enemy.x - 50) < player.x)){
+         playerStartPosition();
+    }
+})
 }
 
+//sets the player in the starting position
+function playerStartPosition(){
+        player.x = 200;
+         player.y = 380;
+}
 Player.prototype.render = function(){
 ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
