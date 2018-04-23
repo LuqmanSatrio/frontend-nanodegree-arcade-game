@@ -9,6 +9,7 @@ function Enemy(x,y,velocity) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
 };
 
 // Update the enemy's position, required method for game
@@ -24,6 +25,11 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
 
+allEnemies.forEach(function(enemy){
+    if(((enemy.y + 30) > player.y  && (enemy.y - 30) < player.y) && ((enemy.x + 50) > player.x && (enemy.x - 50) < player.x)){
+         playerStartPosition();
+    }
+})
 };
 
 // Draw the enemy on the screen, required method for game
@@ -43,7 +49,7 @@ function Player(x,y,velocity){
 }
 
 Player.prototype.update = function(){
-
+displayPointAndLevel();
 // key handler
     if(player.x>0 && this.KeyPressed === 'left'){
            this.x -= this.velocity;
@@ -68,15 +74,30 @@ Player.prototype.update = function(){
 // if the player reaches the water the position is beeing renewed
 if(this.y<0){
    playerStartPosition();
+   nextLevel();
+
 }
 
+function nextLevel(){
+   score = score +1;
+   level = level +1;
+   if(level>1 && level< 3){
+   congratsText = "Good Job!"
+   } else if (level > 3 && level < 5)
+   {
+    congratsText = "Stop the madness!!!"
+   } else if(level > 5 )
+   {
+    congratsText = "WAAAAAAAAAAAAAAAAAAAAA!!!!!"
+   }
+    var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
+    allEnemies.push(enemy);
+}
 
+function displayPointAndLevel(){
+    document.getElementById('scoreAndLevel').innerHTML = "Score: " + score + " | Level: " + level + "<br>" + congratsText ;
+}
 
-allEnemies.forEach(function(enemy){
-    if(((enemy.y + 30) > player.y  && (enemy.y - 30) < player.y) && ((enemy.x + 50) > player.x && (enemy.x - 50) < player.x)){
-         playerStartPosition();
-    }
-})
 }
 
 //sets the player in the starting position
@@ -98,7 +119,9 @@ Player.prototype.handleInput = function(e){
 var allEnemies = [];
 var player = new Player(200, 380, 30);
 var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
-
+var score = 0;
+var level = 1;
+var congratsText = "";
 allEnemies.push(enemy);
 
 
