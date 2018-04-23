@@ -44,7 +44,7 @@ function Player(x,y,velocity){
 
 Player.prototype.update = function(){
 
-
+// key handler
     if(player.x>0 && this.KeyPressed === 'left'){
            this.x -= this.velocity;
     } else if(player.x<400 && this.KeyPressed === 'right'){
@@ -57,10 +57,17 @@ Player.prototype.update = function(){
 // makes sure that the player is only moved once when a button is pressed
      this.KeyPressed = "";
 
+// changes velocity, depending on which ground the player is
+    if(this.y < 230){
+        this.velocity= 50;
+    } else {
+        this.velocity = 30;
+    }
 
+// if the player reaches the water the position is beeing renewed
 if(this.y<0){
     this.x = 200;
-    this.y = 400;
+    this.y = 380;
 }
 
 }
@@ -77,7 +84,7 @@ Player.prototype.handleInput = function(e){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(200, 380, 50);
+var player = new Player(200, 380, 30);
 var enemy = new Enemy(0,Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
