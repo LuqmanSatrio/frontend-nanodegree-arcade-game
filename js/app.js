@@ -17,6 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
     this.x += this.velocity *dt;
 
     if (this.x >= 505) {
@@ -42,14 +43,27 @@ function Player(x,y,velocity){
 
 Player.prototype.update = function(){
 
+    if(this.KeyPressed === 'left'){
+           this.x -= this.velocity;
+    } else if(this.KeyPressed === 'right'){
+           this.x += this.velocity;
+    }  else if(this.KeyPressed === 'up'){
+           this.y -= this.velocity;
+     } else if(this.KeyPressed === 'down'){
+           this.y += this.velocity;
+    }
+
+// makes sure that the player is only moved once when a button is pressed
+     this.KeyPressed = "";
+
 }
 
 Player.prototype.render = function(){
 ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function(){
-
+Player.prototype.handleInput = function(e){
+   this.KeyPressed = e;
 }
 
 // Now instantiate your objects.
