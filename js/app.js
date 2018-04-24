@@ -53,13 +53,13 @@ function Player(x,y,velocity){
 Player.prototype.update = function(){
 displayPointAndLevel();
 // key handler
-    if(player.x>0 && this.KeyPressed === 'left'){
+    if(this.x>0 && this.KeyPressed === 'left'){
            this.x -= this.velocity;
-    } else if(player.x<400 && this.KeyPressed === 'right'){
+    } else if(this.x<400 && this.KeyPressed === 'right'){
            this.x += this.velocity;
     }  else if(this.KeyPressed === 'up'){
            this.y -= this.velocity;
-     } else if(player.y<380 && this.KeyPressed === 'down'){
+     } else if(this.y<380 && this.KeyPressed === 'down'){
            this.y += this.velocity;
 
 }
@@ -75,7 +75,7 @@ displayPointAndLevel();
 
 // if the player reaches the water the position is beeing renewed
 if(this.y<0){
-   player.restartPosition();
+   this.restartPosition();
    nextLevel();
 
 }
@@ -106,8 +106,8 @@ function displayPointAndLevel(){
 
 //sets the player in the starting position
 Player.prototype.restartPosition = function (){
-    player.x = 200;
-    player.y = 380;
+    this.x = 200;
+    this.y = 380;
 }
 
 Player.prototype.render = function(){
